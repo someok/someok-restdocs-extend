@@ -5,7 +5,7 @@ plugins {
 }
 
 group 'com.someok'
-version '1.0.5'
+version '1.0.6'
 description 'spring restdocs extend for someok projects'
 
 ext {
@@ -56,8 +56,9 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.springframework.restdocs:spring-restdocs-core:1.2.2.RELEASE'
-    implementation 'org.springframework.restdocs:spring-restdocs-mockmvc:1.2.2.RELEASE'
+    // 这儿需要使用 compile，而不能用 api，因为 artifacts 不支持
+    compile 'org.springframework.restdocs:spring-restdocs-core:1.2.2.RELEASE'
+    compile 'org.springframework.restdocs:spring-restdocs-mockmvc:1.2.2.RELEASE'
     testImplementation group: 'junit', name: 'junit', version: '4.12'
 }
 

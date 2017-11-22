@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.0.6] - 2017-11-23
+### Changed
+- 修改 `build.gradle` 依赖为 `compile`，因为打包工具不支持 `api`
+
 ## [1.0.5] - 2017-11-23
 ### Added
 - 增加 spring-restdocs-mockmvc 依赖，以便调用方可以少配置一条记录
