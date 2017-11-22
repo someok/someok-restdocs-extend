@@ -5,7 +5,7 @@ plugins {
 }
 
 group 'com.someok'
-version '1.0.6'
+version '1.0.7'
 description 'spring restdocs extend for someok projects'
 
 ext {
@@ -47,6 +47,7 @@ ext {
 apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'maven-publish'
+apply plugin: 'signing'
 
 sourceCompatibility = project_jdk
 targetCompatibility = project_jdk
@@ -115,6 +116,12 @@ bintray {
             name = project.version
             vcsTag = project.version
             released = new Date()
+
+            gpg {
+                sign = true //Determines whether to GPG sign the files. The default is false
+                passphrase = gpgPassword //Optional. The passphrase for GPG signing'
+            }
+
             mavenCentralSync {
                 sync = false
                 //[Default: true] Determines whether to sync the version to Maven Central.
@@ -147,7 +154,7 @@ def pomConfig = {
 
     licenses {
         license {
-            name 'MIT Licence'
+            name 'MIT'
             url 'https://raw.githubusercontent.com/someok/someok-restdocs-extend/master/LICENSE'
             distribution 'repo'
         }
@@ -190,10 +197,15 @@ publishing {
     }
 }
 
+signing {
+    required { gradle.taskGraph.hasTask("uploadArchives") }
+    sign configurations.archives
+}
+
 uploadArchives {
     repositories {
         mavenDeployer {
-//            beforeDeployment { deployment -> signing.signPom(deployment) }
+            beforeDeployment { deployment -> signing.signPom(deployment) }
 
             repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
                 authentication(userName: sonatypeUsername, password: sonatypePassword)
