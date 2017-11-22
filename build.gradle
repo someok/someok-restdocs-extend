@@ -1,0 +1,19 @@
+group 'com.someok'
+version '1.0.0'
+description 'spring restdocs extend for someok projects'
+
+apply plugin: 'java'
+
+sourceCompatibility = project_jdk
+targetCompatibility = project_jdk
+
+[compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.restdocs:spring-restdocs-core:1.2.2.RELEASE'
+    testImplementation group: 'junit', name: 'junit', version: '4.12'
+}
