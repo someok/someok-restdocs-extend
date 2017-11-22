@@ -1,13 +1,55 @@
+import java.text.SimpleDateFormat
+
+plugins {
+    id "com.jfrog.bintray" version "1.7.3"
+}
+
 group 'com.someok'
-version '1.0.0'
+version '1.0.2'
 description 'spring restdocs extend for someok projects'
 
+ext {
+    scm = [
+        url                : 'https://github.com/someok/someok-restdocs-extend',
+        connection         : 'https://github.com/someok/someok-restdocs-extend.git',
+        developerConnection: 'git@github.com:someok/someok-restdocs-extend.git',
+    ]
+
+    defaultManifest = { proj ->
+
+        return manifest {
+            def buildTimeAndDate = new Date()
+            def buildDate = new SimpleDateFormat('yyyy-MM-dd').format(buildTimeAndDate)
+            def buildTime = new SimpleDateFormat('HH:mm').format(buildTimeAndDate)
+
+            def git_cmd = "git rev-parse HEAD"
+            def git_proc = git_cmd.execute()
+
+            attributes 'SCM-Revision': git_proc.text.trim()
+
+            attributes 'Built-By': System.properties['user.name']
+            attributes 'Created-By': System.properties['java.version'] + " (" + System.properties['java.vendor'] + " " + System.getProperty("java.vm.version") + ")"
+            attributes 'Build-Host': InetAddress.localHost.hostName
+            attributes 'Build-Date': buildDate
+            attributes 'Build-Time': buildTime
+            attributes 'Timestamp': String.valueOf(System.currentTimeMillis())
+            attributes 'Specification-Title': proj.archivesBaseName
+            attributes 'Specification-Version': proj.version
+            attributes 'Specification-Vendor': 'someok.com'
+            attributes 'Implementation-Title': proj.archivesBaseName
+            attributes 'Implementation-Version': proj.version
+            attributes 'Implementation-Vendor': 'someok.com'
+            attributes 'provider': 'gradle'
+        }
+    }
+}
+
 apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'maven-publish'
 
 sourceCompatibility = project_jdk
 targetCompatibility = project_jdk
-
-[compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
 
 repositories {
     mavenCentral()
@@ -16,4 +58,150 @@ repositories {
 dependencies {
     implementation 'org.springframework.restdocs:spring-restdocs-core:1.2.2.RELEASE'
     testImplementation group: 'junit', name: 'junit', version: '4.12'
+}
+
+javadoc {
+    options {
+        encoding 'UTF-8'
+        charSet 'UTF-8'
+        author true
+        version true
+        noSince false
+    }
+}
+
+jar {
+    excludes = ['**/rebel.xml']
+    doFirst {
+        manifest = defaultManifest({ project })
+    }
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+    doFirst {
+        manifest = defaultManifest({ project })
+    }
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+    doFirst {
+        manifest = defaultManifest({ project })
+    }
+}
+
+artifacts {
+    archives jar
+    archives javadocJar
+    archives sourcesJar
+}
+
+// jCenter 相关设置
+bintray {
+    user = bintrayUsername
+    key = bintrayApiKey
+    publications = ['jCenterPublish']
+
+    pkg {
+        repo = 'maven'
+        name = project.name
+        desc = project.description
+        version {
+            name = project.version
+            vcsTag = project.version
+            released = new Date()
+            mavenCentralSync {
+                sync = false
+                //[Default: true] Determines whether to sync the version to Maven Central.
+                user = sonatypeUsername //OSS user token: mandatory
+                password = sonatypePassword //OSS user password: mandatory
+                close = '1'
+                //Optional property. By default the staging repository is closed and artifacts are released to Maven Central. You can optionally turn this behaviour off (by puting 0 as value) and release the version manually.
+            }
+        }
+        userOrg = 'someok'
+        labels = ['spring-restdocs', 'java', 'asciidoc']
+        licenses = ['MIT']
+        websiteUrl = scm.url
+        vcsUrl = scm.connection
+        publish = true
+    }
+}
+
+def pomConfig = {
+    packaging 'jar'
+    name project.name
+    description project.description
+    url scm.url
+
+    scm {
+        url scm.url
+        connection scm.connection
+        developerConnection scm.developerConnection
+    }
+
+    licenses {
+        license {
+            name 'MIT Licence'
+            url 'https://raw.githubusercontent.com/someok/someok-restdocs-extend/master/LICENSE'
+            distribution 'repo'
+        }
+    }
+
+    developers {
+        developer {
+            id 'someok'
+            name 'JX Wang'
+            email 'wjianxu@gmail.com'
+            url 'https://github.com/someok'
+            timezone 'Asia/Shanghai'
+        }
+    }
+
+    issueManagement {
+        system 'github'
+        url 'https://github.com/someok/someok-restdocs-extend/issues'
+    }
+}
+
+publishing {
+    publications {
+        jCenterPublish(MavenPublication) {
+            from components.java
+            artifact sourcesJar
+            artifact javadocJar
+
+            groupId project.group
+            artifactId project.name
+            version project.version
+            pom.withXml {
+                def root = asNode()
+//                root.appendNode('description', 'Your description of the lib')
+//                root.appendNode('name', 'Your name of the lib')
+//                root.appendNode('url', 'https://site_for_lib.tld')
+                root.children().last() + pomConfig
+            }
+        }
+    }
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+//            beforeDeployment { deployment -> signing.signPom(deployment) }
+
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: sonatypeUsername, password: sonatypePassword)
+            }
+
+            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots") {
+                authentication(userName: sonatypeUsername, password: sonatypePassword)
+            }
+
+            pom.project pomConfig
+        }
+    }
 }
