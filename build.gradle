@@ -6,11 +6,11 @@ plugins {
 
     // https://github.com/Codearte/gradle-nexus-staging-plugin/
     // 用于自动在 https://oss.sonatype.org/ 上执行 close、release 等相关操作
-    id 'io.codearte.nexus-staging' version '0.11.0'
+//    id 'io.codearte.nexus-staging' version '0.11.0'
 }
 
 group 'com.someok'
-version '1.0.10'
+version '1.0.11'
 description 'spring restdocs extend for someok projects'
 
 ext {
@@ -109,6 +109,7 @@ artifacts {
 
 // jCenter 相关设置
 bintray {
+
     user = bintrayUsername
     key = bintrayApiKey
     publications = ['jCenterPublish']
@@ -202,6 +203,7 @@ publishing {
         }
     }
 }
+/*
 
 signing {
     required { gradle.taskGraph.hasTask("uploadArchives") }
@@ -225,3 +227,4 @@ uploadArchives {
         }
     }
 }
+*/
