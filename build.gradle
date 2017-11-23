@@ -1,11 +1,16 @@
 import java.text.SimpleDateFormat
 
 plugins {
+    // 上传到 jCenter
     id "com.jfrog.bintray" version "1.7.3"
+
+    // https://github.com/Codearte/gradle-nexus-staging-plugin/
+    // 用于自动在 https://oss.sonatype.org/ 上执行 close、release 等相关操作
+    id 'io.codearte.nexus-staging' version '0.11.0'
 }
 
 group 'com.someok'
-version '1.0.8'
+version '1.0.10'
 description 'spring restdocs extend for someok projects'
 
 ext {
