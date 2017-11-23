@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.0.10] - 2017-11-23
+### Changed
+- 测试 bintrayUpload 到 jcenter 并同步到 mvnrepository
+
 ## [1.0.8] - 2017-11-23
 ### Added
 - 启用 jcenter 上传后同步到 mvnrepository 机制
@@ -35,7 +39,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - 增加上传到 jcenter、mvnrepository 配置
 
 
-[Unreleased]: https://github.com/someok/someok-restdocs-extend/compare/v1.0.8...HEAD
+[Unreleased]: https://github.com/someok/someok-restdocs-extend/compare/v1.0.10...HEAD
+[1.0.10]: https://github.com/someok/someok-restdocs-extend/compare/v1.0.8...v1.0.10
 [1.0.8]: https://github.com/someok/someok-restdocs-extend/compare/v1.0.7...v1.0.8
 [1.0.7]: https://github.com/someok/someok-restdocs-extend/compare/v1.0.6...v1.0.7
 [1.0.6]: https://github.com/someok/someok-restdocs-extend/compare/v1.0.5...v1.0.6
