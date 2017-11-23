@@ -5,7 +5,7 @@ plugins {
 }
 
 group 'com.someok'
-version '1.0.7'
+version '1.0.8'
 description 'spring restdocs extend for someok projects'
 
 ext {
@@ -107,6 +107,7 @@ bintray {
     user = bintrayUsername
     key = bintrayApiKey
     publications = ['jCenterPublish']
+    publish = true
 
     pkg {
         repo = 'maven'
@@ -123,7 +124,7 @@ bintray {
             }
 
             mavenCentralSync {
-                sync = false
+                sync = true
                 //[Default: true] Determines whether to sync the version to Maven Central.
                 user = sonatypeUsername //OSS user token: mandatory
                 password = sonatypePassword //OSS user password: mandatory
@@ -136,7 +137,7 @@ bintray {
         licenses = ['MIT']
         websiteUrl = scm.url
         vcsUrl = scm.connection
-        publish = true
+        publicDownloadNumbers = true
     }
 }
 
