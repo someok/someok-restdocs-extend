@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.0.8] - 2017-11-23
+### Added
+- 启用 jcenter 上传后同步到 mvnrepository 机制
+
 ## [1.0.7] - 2017-11-23
 ### Added
 - 增加 gpg 签名
@@ -31,7 +35,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - 增加上传到 jcenter、mvnrepository 配置
 
 
-[Unreleased]: https://github.com/someok/someok-restdocs-extend/compare/v1.0.6...HEAD
+[Unreleased]: https://github.com/someok/someok-restdocs-extend/compare/v1.0.8...HEAD
+[1.0.8]: https://github.com/someok/someok-restdocs-extend/compare/v1.0.7...v1.0.8
+[1.0.7]: https://github.com/someok/someok-restdocs-extend/compare/v1.0.6...v1.0.7
 [1.0.6]: https://github.com/someok/someok-restdocs-extend/compare/v1.0.5...v1.0.6
 [1.0.5]: https://github.com/someok/someok-restdocs-extend/compare/v1.0.4...v1.0.5
 [1.0.4]: https://github.com/someok/someok-restdocs-extend/compare/v1.0.3...v1.0.4
