@@ -10,7 +10,7 @@ plugins {
 }
 
 group 'com.someok'
-version '1.0.11'
+version '1.0.12'
 description 'spring restdocs extend for someok projects'
 
 ext {
@@ -195,7 +195,7 @@ publishing {
             version project.version
             pom.withXml {
                 def root = asNode()
-//                root.appendNode('description', 'Your description of the lib')
+                root.appendNode('description', project.description)
 //                root.appendNode('name', 'Your name of the lib')
 //                root.appendNode('url', 'https://site_for_lib.tld')
                 root.children().last() + pomConfig
