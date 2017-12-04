@@ -21,7 +21,7 @@ public class MethodAndPathSnippet extends TemplatedSnippet {
     /**
      * 对应 request-method-path.snippet 文件
      */
-    private static final String METHOD_PATH = "request-method-path";
+    private static final String METHOD_PATH = "someok-request-method-path";
 
     public MethodAndPathSnippet() {
         super(METHOD_PATH, null);

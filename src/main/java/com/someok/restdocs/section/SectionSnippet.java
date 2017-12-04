@@ -24,7 +24,7 @@ import java.util.Map;
  */
 public class SectionSnippet extends TemplatedSnippet {
 
-    private static final String SNIPPET_NAME = "section";
+    private static final String SNIPPET_NAME = "someok-section";
 
     private Snippet[] snippets;
 

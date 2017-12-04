@@ -17,7 +17,7 @@ import java.util.Map;
  * @see ErrorDescriptor
  */
 public class ResponseErrorsSnippet extends TemplatedSnippet {
-    private static final String snippet_name = "response-errors";
+    private static final String snippet_name = "someok-response-errors";
 
     private List<ErrorDescriptor> errorDescriptors;
 
