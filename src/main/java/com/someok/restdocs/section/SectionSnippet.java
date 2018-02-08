@@ -1,6 +1,7 @@
 package com.someok.restdocs.section;
 
 import com.someok.restdocs.payload.ResponseErrorsSnippet;
+import com.someok.restdocs.payload.ResponseHttpStatusSnippet;
 import org.springframework.restdocs.headers.RequestHeadersSnippet;
 import org.springframework.restdocs.operation.Operation;
 import org.springframework.restdocs.payload.RequestFieldsSnippet;
@@ -48,6 +49,7 @@ public class SectionSnippet extends TemplatedSnippet {
         boolean hasResponseFields = hasSnippet(ResponseFieldsSnippet.class);
         boolean hasRequestFields = hasSnippet(RequestFieldsSnippet.class);
         boolean hasResponseErrors = hasSnippet(ResponseErrorsSnippet.class);
+        boolean hasResponeseHttpStatuses = hasSnippet(ResponseHttpStatusSnippet.class);
 
         model.put("hasRequestParameters", hasRequestParameters);
         model.put("hasPathParameters", hasPathParameters);
@@ -56,6 +58,7 @@ public class SectionSnippet extends TemplatedSnippet {
         model.put("hasResponseFields", hasResponseFields);
         model.put("hasRequestFields", hasRequestFields);
         model.put("hasResponseErrors", hasResponseErrors);
+        model.put("hasResponeseHttpStatuses", hasResponeseHttpStatuses);
 
         return model;
     }

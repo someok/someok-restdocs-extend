@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.0.15] - 2018-02-08
+### Added
+- 增加 http status 列表展示 snippet
+
 ## [1.0.14] - 2017-12-05
 ### Changed
 - 修正 section snippet，在自定义的两个 include snippet 前面加上 someok 前缀
@@ -47,7 +51,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - 增加上传到 jcenter、mvnrepository 配置
 
 
-[Unreleased]: https://github.com/someok/someok-restdocs-extend/compare/v1.0.14...HEAD
+[Unreleased]: https://github.com/someok/someok-restdocs-extend/compare/v1.0.15...HEAD
+[1.0.15]: https://github.com/someok/someok-restdocs-extend/compare/v1.0.14...v1.0.15
 [1.0.14]: https://github.com/someok/someok-restdocs-extend/compare/v1.0.13...v1.0.14
 [1.0.13]: https://github.com/someok/someok-restdocs-extend/compare/v1.0.10...v1.0.13
 [1.0.10]: https://github.com/someok/someok-restdocs-extend/compare/v1.0.8...v1.0.10

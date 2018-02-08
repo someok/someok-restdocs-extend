@@ -19,4 +19,15 @@ public class ExtraPayloadDocumentation {
     public static ResponseErrorsSnippet responseErrors(List<ErrorDescriptor> errorDescriptors) {
         return new ResponseErrorsSnippet(errorDescriptors);
     }
+
+    /**
+     * 生成 http status 列表 adoc。
+     *
+     * @param descriptors status 列表
+     * @return snippet
+     */
+    public static ResponseHttpStatusSnippet responseHttpStatuses(
+        List<HttpStatusDescriptor> descriptors) {
+        return new ResponseHttpStatusSnippet(descriptors);
+    }
 }
